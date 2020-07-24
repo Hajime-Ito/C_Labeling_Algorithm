@@ -1,0 +1,322 @@
+THRESHOLD = 198のケース
+
+r = 1000, c = 1000 (10回のテストケース結果)
+
+time: 1595592915
+success
+time: 1595592972
+success
+time: 1595592996
+success
+time: 1595593011
+success
+time: 1595593033
+success
+time: 1595593058
+success
+time: 1595593078
+success
+time: 1595593105
+success
+time: 1595593122
+success
+time: 1595593144
+success
+
+
+THRESHOLD = 128のケース
+
+r = 500, c = 500 (10回のテストケース結果)
+
+time: 1595382150
+success 3.7sec
+time: 1595382228
+success 4.45sec
+time: 1595382251
+success 3.5sec
+time: 1595382331
+success 3.44sec
+time: 1595382353
+success 3sec
+time: 1595382370
+success 3.5sec
+time: 1595382396
+success 3.56sec
+time: 1595382429
+success 3.3sec
+time: 1595382454
+success 3.5sec
+time: 1595382514
+success 3.5sec
+
+r = 200, c = 300 (30回のテストケース結果)
+
+time: 1595592204
+success
+time: 1595602204
+success
+time: 1595612204
+success
+time: 1595622204
+success
+time: 1595632204
+success
+time: 1595592253
+success
+time: 1595602253
+success
+time: 1595612253
+success
+time: 1595622253
+success
+time: 1595632253
+success
+time: 1595592282
+success
+time: 1595602282
+success
+time: 1595612282
+success
+time: 1595622282
+success
+time: 1595632282
+success
+time: 1595592305
+success
+time: 1595602305
+success
+time: 1595612305
+success
+time: 1595622305
+success
+time: 1595632304
+success
+time: 1595592342
+success
+time: 1595602342
+success
+time: 1595612342
+success
+time: 1595622342
+success
+time: 1595632342
+success
+time: 1595592391
+success
+time: 1595602391
+success
+time: 1595612391
+success
+time: 1595622391
+success
+time: 1595632390
+success
+
+
+r = 200, c = 200 (10回のテストケース結果)
+time: 1595593272
+success
+time: 1595603271
+success
+time: 1595613271
+success
+time: 1595623271
+success
+time: 1595633270
+success
+time: 1595643270
+success
+time: 1595653269
+success
+time: 1595663268
+success
+time: 1595673268
+success
+time: 1595683267
+success
+
+
+
+r = 100, c = 100 (90回のテストケース結果)
+
+time: 1595592013
+success
+time: 1595602012
+success
+time: 1595612011
+success
+time: 1595622010
+success
+time: 1595632009
+success
+time: 1595642008
+success
+time: 1595652007
+success
+time: 1595662007
+success
+time: 1595672006
+success
+time: 1595682005
+success
+time: 1595692004
+success
+time: 1595702003
+success
+time: 1595712002
+success
+time: 1595722002
+success
+time: 1595732001
+success
+time: 1595742000
+success
+time: 1595751999
+success
+time: 1595761998
+success
+time: 1595771997
+success
+time: 1595781996
+success
+time: 1595791996
+success
+time: 1595801995
+success
+time: 1595811994
+success
+time: 1595821993
+success
+time: 1595831992
+success
+time: 1595841991
+success
+time: 1595851990
+success
+time: 1595861990
+success
+time: 1595871989
+success
+time: 1595881988
+success
+time: 1595592085
+success
+time: 1595602084
+success
+time: 1595612084
+success
+time: 1595622083
+success
+time: 1595632082
+success
+time: 1595642081
+success
+time: 1595652080
+success
+time: 1595662079
+success
+time: 1595672078
+success
+time: 1595682077
+success
+time: 1595692076
+success
+time: 1595702076
+success
+time: 1595712075
+success
+time: 1595722074
+success
+time: 1595732073
+success
+time: 1595742072
+success
+time: 1595752071
+success
+time: 1595762070
+success
+time: 1595772069
+success
+time: 1595782068
+success
+time: 1595792068
+success
+time: 1595802067
+success
+time: 1595812066
+success
+time: 1595822065
+success
+time: 1595832064
+success
+time: 1595842063
+success
+time: 1595852062
+success
+time: 1595862061
+success
+time: 1595872060
+success
+time: 1595882060
+success
+time: 1595592113
+success
+time: 1595602112
+success
+time: 1595612111
+success
+time: 1595622110
+success
+time: 1595632109
+success
+time: 1595642108
+success
+time: 1595652107
+success
+time: 1595662107
+success
+time: 1595672106
+success
+time: 1595682105
+success
+time: 1595692104
+success
+time: 1595702103
+success
+time: 1595712102
+success
+time: 1595722101
+success
+time: 1595732100
+success
+time: 1595742100
+success
+time: 1595752099
+success
+time: 1595762098
+success
+time: 1595772097
+success
+time: 1595782096
+success
+time: 1595792095
+success
+time: 1595802094
+success
+time: 1595812093
+success
+time: 1595822093
+success
+time: 1595832092
+success
+time: 1595842091
+success
+time: 1595852090
+success
+time: 1595862089
+success
+time: 1595872088
+success
+time: 1595882087
+success
+

@@ -119,7 +119,7 @@ void init_picture(Picture *p, unsigned int h, unsigned int w)
         for (c = 1; c < p->col_size - 1; c++)
         {
             brightness = (rand() % 256);
-            if (brightness >= THRESHOLD_BRIGHTNESS)
+            if (brightness <= THRESHOLD_BRIGHTNESS)
             {
                 p->pixel_map[r][c] = TARGET_PIXEL;
                 p->target_pixel_sum += 1;

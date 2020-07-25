@@ -30,9 +30,8 @@ void init_lookup_table(unsigned int t[MAX_NUM][1]);
 void push_lookup_table(unsigned int t[MAX_NUM][1], unsigned int index, unsigned int value);
 void update_lookup_table(unsigned int t[MAX_NUM][1], unsigned int top_label_val, unsigned int left_label_val);
 unsigned int get_lookup_table(unsigned int t[MAX_NUM][1], unsigned int index);
-void push_array_unique(unsigned int t[], unsigned int value);
 void resolve_conflict(Picture *p, unsigned int t[MAX_NUM][1], unsigned int compression_label[LABEL_MAX_SIZE]);
-void compress_label(Picture *p, unsigned int compression_label[LABEL_MAX_SIZE]);
+void compress_label(Picture *p, unsigned int compression_label[LABEL_MAX_SIZE], unsigned int lookup_table[MAX_NUM][1]);
 void labeling(Picture *p, unsigned int t[MAX_NUM][1], unsigned int compression_label[LABEL_MAX_SIZE]);
 void test_case(Picture p);
 void FREE(Picture *p);
@@ -51,14 +50,14 @@ int main(void)
     fgets(buf, sizeof(buf), stdin);
     sscanf(buf, "%u %u\n", &height, &width);
 
-    for (int testcase_count = 0; testcase_count < 1; testcase_count++)
+    for (testcase_count = 0; testcase_count < 1; testcase_count++)
     {
         srand((unsigned int)time(NULL));
         printf("time: %u\n", (unsigned int)time(NULL));
         init_picture(&picture, height, width);
         init_lookup_table(lookup_table);
         labeling(&picture, lookup_table, compression_label);
-        compress_label(&picture, compression_label);
+        compress_label(&picture, compression_label, lookup_table);
         test_case(picture);
         //print_picture(picture);
         FREE(&picture);
@@ -247,22 +246,6 @@ unsigned int get_lookup_table(unsigned int t[MAX_NUM][1], unsigned int index)
     return t[index][0];
 }
 
-/* 配列の要素と重複していない値を追加する関数 */
-void push_array_unique(unsigned int t[], unsigned int value)
-{
-    unsigned int index = 0;
-    for (index = 0; index < LABEL_MAX_SIZE; index++)
-    {
-        if (t[index] == NONTARGET_PIXEL) /* 初期化時以外に挿入されないので */
-            break;
-
-        if (t[index] == value)
-            return;
-    }
-
-    t[index] = value;
-}
-
 /* 衝突処理(繋がっているけどラベル値が違うピクセルに適切な値を割り当てる)を行う関数 */
 void resolve_conflict(Picture *p, unsigned int t[MAX_NUM][1], unsigned int compression_label[LABEL_MAX_SIZE])
 {
@@ -292,7 +275,6 @@ void resolve_conflict(Picture *p, unsigned int t[MAX_NUM][1], unsigned int compr
                 if (get_lookup_table(t, update_label_val) == update_label_val)
                 {
                     p->pixel_map[r][c] = get_lookup_table(t, update_label_val);
-                    //push_array_unique(compression_label, get_lookup_table(t, update_label_val)); 圧縮するなら呼び出す
                     break;
                 }
             }
@@ -300,24 +282,36 @@ void resolve_conflict(Picture *p, unsigned int t[MAX_NUM][1], unsigned int compr
 }
 
 /* ラベル値を圧縮して再度ラベリングする(必須ではない) */
-void compress_label(Picture *p, unsigned int compression_label[LABEL_MAX_SIZE])
+void compress_label(Picture *p, unsigned int compression_label[LABEL_MAX_SIZE], unsigned int lookup_table[MAX_NUM][1])
 {
     unsigned int r = 1;
     unsigned int c = 1;
     unsigned int pat = 0;
+
+    for (r = 1; r < MAX_NUM; r++)
+    {
+        if (get_lookup_table(lookup_table, r) == EXCEPTION)
+            break;
+
+        if (get_lookup_table(lookup_table, r) == r)
+        {
+            compression_label[c] = r;
+            c += 1;
+        }
+    }
 
     for (r = 1; r < p->row_size - 1; r++)
         for (c = 1; c < p->col_size - 1; c++)
         {
             if ((NONTARGET_PIXEL == p->pixel_map[r][c] || OUTSPACE == p->pixel_map[r][c]))
                 continue;
-            for (pat = 0; pat < LABEL_MAX_SIZE; pat++)
+            for (pat = 1; pat < LABEL_MAX_SIZE; pat++)
             {
-                if (compression_label[pat] == 0)
+                if (compression_label[pat] == NONTARGET_PIXEL)
                     continue;
 
                 if (p->pixel_map[r][c] == compression_label[pat])
-                    p->pixel_map[r][c] = pat + 1;
+                    p->pixel_map[r][c] = pat;
             }
         }
 }

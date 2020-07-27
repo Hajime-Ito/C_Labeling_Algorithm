@@ -91,11 +91,9 @@ void init_picture(Picture *p, unsigned int h, unsigned int w)
     unsigned int r = 0;
     unsigned int c = 0;
     unsigned char brightness = 0;
-
     /* 上下左右に余白を持たせておく */
     p->row_size = h + 2;
     p->col_size = w + 2;
-
     /* target_pixel_sumの初期化 */
     p->target_pixel_sum = 0;
 
@@ -104,16 +102,12 @@ void init_picture(Picture *p, unsigned int h, unsigned int w)
     for (r = 0; r < p->row_size; r++)
         p->pixel_map[r] = (unsigned int *)malloc(p->col_size * sizeof(unsigned int));
 
-    r = 0;
-
     /* 全ての画素にOUTSPACEを割り当てる */
     for (r = 0; r < p->row_size; r++)
         for (c = 0; c < p->col_size; c++)
             p->pixel_map[r][c] = OUTSPACE;
 
     /* ランダムに画素値を決定し、閾値を基に二値化する */
-    r = 1;
-    c = 1;
     for (r = 1; r < p->row_size - 1; r++)
         for (c = 1; c < p->col_size - 1; c++)
         {
@@ -167,7 +161,6 @@ void update_lookup_table(unsigned int t[MAX_NUM][1], unsigned int top_label_val,
 {
     unsigned int max_label_val = 0; /* 着目画素のラベル値と比べて一番大きい値 */
     unsigned int min_label_val = 0; /* 着目画素のラベル値と比べて一番小さい値 */
-
     unsigned int pat = 0;
     unsigned int update_label_val = 0;
 
@@ -211,8 +204,6 @@ void update_lookup_table(unsigned int t[MAX_NUM][1], unsigned int top_label_val,
     /* min_pixel_val 1 */
     /* 以上が得られたとき、lookup_tableは2->1と更新する */
     /* ここで、2がupdate_label_valである。 */
-
-    pat = MAX_NUM;
     update_label_val = max_label_val;
 
     for (pat = MAX_NUM; pat > 0; pat--)
@@ -262,8 +253,6 @@ void resolve_conflict(Picture *p, unsigned int t[MAX_NUM][1], unsigned int compr
                 continue;
 
             update_label_val = p->pixel_map[r][c];
-            pat = MAX_NUM;
-
             /* ここら辺はラベル割り当てとほとんど同じ */
             for (pat = MAX_NUM; pat > 0; pat--)
             {
@@ -290,7 +279,7 @@ void compress_label(Picture *p, unsigned int compression_label[LABEL_MAX_SIZE], 
 
     for (r = 1; r < MAX_NUM; r++)
     {
-        if (get_lookup_table(lookup_table, r) == EXCEPTION)
+        if (EXCEPTION == get_lookup_table(lookup_table, r))
             break;
 
         if (get_lookup_table(lookup_table, r) == r)
@@ -307,7 +296,7 @@ void compress_label(Picture *p, unsigned int compression_label[LABEL_MAX_SIZE], 
                 continue;
             for (pat = 1; pat < LABEL_MAX_SIZE; pat++)
             {
-                if (compression_label[pat] == NONTARGET_PIXEL)
+                if (NONTARGET_PIXEL == compression_label[pat])
                     continue;
 
                 if (p->pixel_map[r][c] == compression_label[pat])
@@ -401,7 +390,6 @@ void test_case(Picture p)
     unsigned int r = 1;
     unsigned int c = 1;
     unsigned int pat = 0;
-
     /* debug */
     unsigned debug = 0;
     unsigned debug_target_pixel_sum = 0;
